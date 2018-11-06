@@ -1,12 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import BarChart from "./BarChart";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class CodeSplit extends React.Component {
+  state = {
+    showChart: false
+  };
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+  toggleCheckbox = () => {
+    this.setState(({ showChart }) => ({
+      showChart: !showChart
+    }));
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Hello CTS!</h1>
+        <label>
+          Show Bar Chart
+          <input
+            type="checkbox"
+            value={this.state.showChart}
+            onChange={this.toggleCheckbox}
+          />
+          {this.state.showChart ? <BarChart /> : null}
+        </label>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<CodeSplit />, document.getElementById("root"));
